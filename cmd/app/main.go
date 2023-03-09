@@ -11,10 +11,10 @@ var flagNew = &app.FlagParameters{}
 
 func init() {
 	var paramDefault = &app.FlagParameters{
-		Host:     "https://myserver.atlassian.net",
+		Host:     "https://brandquad.atlassian.net",
 		UserName: "",
 		Token:    "",
-		Group:    "My Group Jira",
+		Group:    "For Accounting Dep",
 		Status:   "Done",
 	}
 

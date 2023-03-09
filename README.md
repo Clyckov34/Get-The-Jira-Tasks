@@ -44,8 +44,8 @@
 - `--help` Подробное описания парметров (Обязательно к просмотру)
 - `--date_start` Начальная дата запроса. Формат: YYYY-MM-DD `Default`: `Сегоднешний день 00:00`
 - `--date_end` Конечная дата запроса Формат: YYYY-MM-DD. `Default`: `Сегоднешний день 23:59`
-- `--group` Название группы в Jira. Список пользователей. `Default`: `My Group Jira`
-- `--host` Хост Jira Cloud. `Default`: `https://myserver.atlassian.net`
+- `--group` Название группы в Jira. Список пользователей. `Default`: `For Accounting Dep`
+- `--host` Хост Jira Cloud. `Default`: `https://brandquad.atlassian.net`
 - `--status` Статус задачи. `Default`: `Done`
 - `--token` Токен
 - `--user` Логин пользователя
