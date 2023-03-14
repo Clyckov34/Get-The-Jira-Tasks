@@ -12,7 +12,7 @@ import (
 )
 
 // const filterCreateTasks = `status in (%v) AND created >= "%v 00:00" AND created <= "%v 23:59" AND assignee in (membersOf("%v")) ORDER BY created DESC` // Фильтр по созданным задачам
-const filterUpdateTasks = `status in (%v) AND updated >= "%v 00:00" AND updated <= "%v 23:59" AND assignee in (membersOf("%v")) ORDER BY created DESC` // Фильтр по обновленным задачам
+const filterUpdateTasks = `status in (%v) AND updated >= "%v 00:00" AND updated <= "%v 23:59" AND assignee in (membersOf("%v")) ORDER BY updated DESC` // Фильтр по обновленным задачам
 
 // Run запуск приложения
 func Run(fp *FlagParameters) error {
