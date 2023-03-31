@@ -11,8 +11,8 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
-// const filterCreateTasks = `status in (%v) AND created >= "%v 00:00" AND created <= "%v 23:59" AND assignee in (membersOf("%v")) ORDER BY created DESC` // Фильтр по созданным задачам
-const filterUpdateTasks = `status in (%v) AND updated >= "%v 00:00" AND updated <= "%v 23:59" AND assignee in (membersOf("%v")) ORDER BY updated DESC` // Фильтр по обновленным задачам
+const filter = `status in (%v) AND created >= "%v 00:00" AND created <= "%v 23:59" AND assignee in (membersOf("%v")) ORDER BY created DESC` // Фильтр по созданным задачам
+//const filter = `status in (%v) AND updated >= "%v 00:00" AND updated <= "%v 23:59" AND assignee in (membersOf("%v")) ORDER BY updated DESC` // Фильтр по обновленным задачам
 
 // Run запуск приложения
 func Run(fp *FlagParameters) error {
@@ -30,7 +30,7 @@ func Run(fp *FlagParameters) error {
 	}
 
 	//Фильтр JQL в Jira
-	jql := fmt.Sprintf(filterUpdateTasks, fp.Status, dateStart, dateEnd, fp.Group)
+	jql := fmt.Sprintf(filter, fp.Status, dateStart, dateEnd, fp.Group)
 
 	var server = &jira.Setting{
 		Host: &fp.Host,
