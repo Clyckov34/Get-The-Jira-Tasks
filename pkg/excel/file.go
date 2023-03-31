@@ -10,11 +10,11 @@ import (
 func (m *Options) ListAll() {
 	nameSheet := "Sheet1"
 
-	m.setTitle(nameSheet)
+	m.setTableTitle(nameSheet)
 	m.style(nameSheet)
 
 	for key, value := range *m.Issues {
-		m.setData(nameSheet, key, &value)
+		m.setTableData(nameSheet, key, &value)
 	}
 
 	m.sheetRename(nameSheet, "Общий список задач")
@@ -33,11 +33,11 @@ func (m *Options) ListUser(userList *[]string) {
 		}
 
 		m.File.NewSheet(user)
-		m.setTitle(user)
+		m.setTableTitle(user)
 		m.style(user)
 
 		for key, value := range data {
-			m.setData(user, key, &value)
+			m.setTableData(user, key, &value)
 		}
 	}
 }
