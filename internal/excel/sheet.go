@@ -26,7 +26,7 @@ func (m *Options) setData(sheet string, key int, value *jira.Issue) {
 	createTask, _ := value.Fields.Created.MarshalJSON()
 	resolutionTask, _ := value.Fields.Resolutiondate.MarshalJSON()
 
-	_ = m.File.SetCellValue(sheet, fmt.Sprintf("A%d", key+2), m.keyTask(value.Key))
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("A%d", key+2), keyTask(value.Key))
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("B%d", key+2), value.Key)
 	_ = m.File.SetCellFormula(sheet, fmt.Sprintf("C%d", key+2), `HYPERLINK("`+*m.Host+`/browse/`+value.Key+`")`)
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("D%d", key+2), value.Fields.Summary)
@@ -34,18 +34,18 @@ func (m *Options) setData(sheet string, key int, value *jira.Issue) {
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("F%d", key+2), value.Fields.Status.Name)
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("G%d", key+2), value.Fields.Creator.DisplayName)
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("H%d", key+2), value.Fields.Assignee.DisplayName)
-	_ = m.File.SetCellValue(sheet, fmt.Sprintf("I%d", key+2), m.parseDate(createTask))
-	_ = m.File.SetCellValue(sheet, fmt.Sprintf("J%d", key+2), m.parseDate(resolutionTask))
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("I%d", key+2), parseDate(createTask))
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("J%d", key+2), parseDate(resolutionTask))
 }
 
 //keyTask преобразовывает номер ключа ABCD-1234 -> ABCD
-func (m *Options) keyTask(nameKey string) string {
+func keyTask(nameKey string) string {
 	key := strings.Split(nameKey, "-")
 	return key[0]
 }
 
 //parseDate обработка даты в формат
-func (m *Options) parseDate(date []byte) interface{} {
+func parseDate(date []byte) interface{} {
 	h, _ := time.Parse("\"2006-01-02T15:04:05.000-0700\"", string(date))
 	timeString := h.Format("2006-01-02")
 
