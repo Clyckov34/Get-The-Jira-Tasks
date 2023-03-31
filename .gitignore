@@ -1,4 +1,5 @@
 .idea
 bin
+main
 *.txt
 *.xlsx

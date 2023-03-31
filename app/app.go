@@ -2,9 +2,9 @@ package app
 
 import (
 	"fmt"
-	"rjt/internal/excel"
-	"rjt/internal/jira"
-	"rjt/pkg/check"
+	"rjt/pkg/excel"
+	"rjt/pkg/jira"
+	"rjt/app/date"
 	"time"
 
 	jr "github.com/andygrunwald/go-jira"
@@ -19,12 +19,12 @@ func Run(fp *FlagParameters) error {
 	timeStart := time.Now() //Начало таймера
 
 	//Проверка введенного формата даты
-	dateStart, err := check.DateFormatParse(&fp.DateStart)
+	dateStart, err := date.FormatParseDate(&fp.DateStart)
 	if err != nil {
 		return err
 	}
 
-	dateEnd, err := check.DateFormatParse(&fp.DateEnd)
+	dateEnd, err := date.FormatParseDate(&fp.DateEnd)
 	if err != nil {
 		return err
 	}
@@ -50,14 +50,14 @@ func Run(fp *FlagParameters) error {
 
 	//Запрос в JQL
 	fmt.Println("Загрузка: 30% - Запрос в JQL")
-	issueList, err := server.SearchTask(client)
+	issueList, err := server.GetTask(client)
 	if err != nil {
 		return err
 	}
 
 	//Запрос на список пользователей
 	fmt.Println("Загрузка: 50% - Запрос на список пользователей")
-	userList, err := server.GroupUser(client, &fp.Group)
+	userList, err := server.GetGroupUser(client, &fp.Group)
 	if err != nil {
 		return err
 	}

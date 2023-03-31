@@ -6,8 +6,8 @@ import (
 	jr "github.com/andygrunwald/go-jira"
 )
 
-// SearchTask поиск задач
-func (m *Setting) SearchTask(client *jr.Client) ([]jr.Issue, error) {
+// GetTask получить список задач
+func (m *Setting) GetTask(client *jr.Client) ([]jr.Issue, error) {
 	var (
 		last   int
 		issues []jr.Issue
@@ -38,8 +38,8 @@ func (m *Setting) SearchTask(client *jr.Client) ([]jr.Issue, error) {
 	}
 }
 
-// GroupUser список сотрудников
-func (m *Setting) GroupUser(client *jr.Client, nameGroup *string) ([]string, error) {
+// GetGroupUser получить список сотрудников
+func (m *Setting) GetGroupUser(client *jr.Client, nameGroup *string) ([]string, error) {
 	group := make([]string, 0)
 
 	list, _, err := client.Group.Get(*nameGroup)
