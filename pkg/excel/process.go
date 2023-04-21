@@ -38,9 +38,9 @@ func (m *Options) setTableData(sheet string, key int, value *jira.Issue) {
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("F%d", key+2), value.Fields.Status.Name)
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("G%d", key+2), value.Fields.Creator.DisplayName)
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("H%d", key+2), value.Fields.Assignee.DisplayName)
-	_ = m.File.SetCellValue(sheet, fmt.Sprintf("I%d", key+2), date.ParseDate(dateCreateTask))
-	_ = m.File.SetCellValue(sheet, fmt.Sprintf("J%d", key+2), date.ParseDate(dateResolutionTask))
-	_ = m.File.SetCellValue(sheet, fmt.Sprintf("K%d", key+2), date.ParseDate(dateUpdateTask))
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("I%d", key+2), date.Parse(dateCreateTask))
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("J%d", key+2), date.Parse(dateResolutionTask))
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("K%d", key+2), date.Parse(dateUpdateTask))
 }
 
 // sheetRename переменовывает лист в таблице

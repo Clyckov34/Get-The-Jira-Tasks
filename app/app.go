@@ -19,12 +19,12 @@ func Run(fp *FlagParameters) error {
 	timeStart := time.Now() //Начало таймера
 
 	//Проверка введенного формата даты
-	dateStart, err := date.FormatParseDate(&fp.DateStart)
+	dateStart, err := date.Check(&fp.DateStart)
 	if err != nil {
 		return err
 	}
 
-	dateEnd, err := date.FormatParseDate(&fp.DateEnd)
+	dateEnd, err := date.Check(&fp.DateEnd)
 	if err != nil {
 		return err
 	}
