@@ -3,8 +3,10 @@ package main
 import (
 	"flag"
 	"log"
-	"rjt/app/date"
 	"rjt/app"
+	"rjt/app/check"
+	"rjt/app/date"
+	"rjt/app/info"
 )
 
 var flagNew = &app.FlagParameters{}
@@ -12,8 +14,6 @@ var flagNew = &app.FlagParameters{}
 func init() {
 	var paramDefault = &app.FlagParameters{
 		Host:     "https://brandquad.atlassian.net",
-		UserName: "",
-		Token:    "",
 		Group:    "For Accounting Dep",
 		Status:   "Done",
 	}
@@ -29,7 +29,13 @@ func init() {
 }
 
 func main() {
+	if err := check.Args(); err != nil {
+		info.AppFlag()
+		log.Fatalln(err)
+	}
+
 	flag.Parse()
+
 	if err := app.Run(flagNew); err != nil {
 		log.Fatalln(err)
 	}
