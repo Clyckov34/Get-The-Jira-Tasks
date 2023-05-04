@@ -17,7 +17,7 @@ func Run(fp *jira.FlagParameters) error {
 	fmt.Println("Загрузка: 10%. Проверка параметров")
 
 	// Проверка параметров на кол-во
-	if err := check.Args(); err != nil {
+	if err := check.Args(5); err != nil {
 		info.AppFlag()
 		log.Fatalln(err)
 	}
