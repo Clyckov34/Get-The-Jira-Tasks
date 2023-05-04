@@ -2,7 +2,6 @@ package excel
 
 import (
 	"fmt"
-	"rjt/app/date"
 
 	jr "rjt/pkg/jira"
 
@@ -32,15 +31,15 @@ func (m *Options) setTableData(sheet string, key int, value *jira.Issue) {
 
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("A%d", key+2), jr.KeyTask(value.Key))
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("B%d", key+2), value.Key)
-	_ = m.File.SetCellFormula(sheet, fmt.Sprintf("C%d", key+2), `HYPERLINK("`+*m.Host+`/browse/`+value.Key+`")`)
+	_ = m.File.SetCellFormula(sheet, fmt.Sprintf("C%d", key+2), `HYPERLINK("`+m.Host+`/browse/`+value.Key+`")`)
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("D%d", key+2), value.Fields.Summary)
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("E%d", key+2), value.Fields.Type.Name)
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("F%d", key+2), value.Fields.Status.Name)
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("G%d", key+2), value.Fields.Creator.DisplayName)
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("H%d", key+2), value.Fields.Assignee.DisplayName)
-	_ = m.File.SetCellValue(sheet, fmt.Sprintf("I%d", key+2), date.Parse(dateCreateTask))
-	_ = m.File.SetCellValue(sheet, fmt.Sprintf("J%d", key+2), date.Parse(dateResolutionTask))
-	_ = m.File.SetCellValue(sheet, fmt.Sprintf("K%d", key+2), date.Parse(dateUpdateTask))
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("I%d", key+2), parse(dateCreateTask))
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("J%d", key+2), parse(dateResolutionTask))
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("K%d", key+2), parse(dateUpdateTask))
 }
 
 // sheetRename переменовывает лист в таблице

@@ -30,34 +30,31 @@
 ### 2. Сгенерировать Token
 - Чтобы создать свой токен https://id.atlassian.com/manage/api-tokens
 
-### 3. Настройка поумолчанию параметров (флагов) утилиты
-1) Откройте файл `main.go`
-2) Отредактируйте параметры в переменной `var paramDefault`
-    
-   1) `Host`: URL Jira Cloud
-   2) `Group`: Название группы (Которую создали) в Jira.
-   3) `Status`: Статусы задач. (Можно перечислять через запятую)
+### 3. Описание флагов:
 
-### 4. Описание флагов:
-
+- `--host` Хост Jira Cloud.
+- `--user` Логин пользователя
+- `--token` Токен
+- `--group` Название группы в Jira. Список пользователей.
 - `--date_start` Начальная дата запроса. Формат: YYYY-MM-DD `Default`: `Сегоднешний день 00:00`
 - `--date_end` Конечная дата запроса Формат: YYYY-MM-DD. `Default`: `Сегоднешний день 23:59`
-- `--group` Название группы в Jira. Список пользователей. `Default`: `My Group`
-- `--host` Хост Jira Cloud. `Default`: `https://myserver.atlassian.net`
 - `--status` Статус задачи. `Default`: `Done`
-- `--token` Токен
-- `--user` Логин пользователя
 
-**Заметка**: Значения `Default` могут различаться из-за пункта _2._
-
-### 5. Запуск утилиты "Выгрузка отчета за сегодня":
+### 4. Запуск утилиты "Выгрузка отчета ВЫПОЛНЕНЫХ задач за сегодня":
 
 ```
-go run main.go --user=Почта_Пользователя --token=Токен`
+go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --token="Token" --group="My Group"`
 ```
 
-### 6. Запуск утилиты "Выгрузка отчета за конкретный период":
+### 5. Запуск утилиты "Выгрузка отчета ВЫПОЛНЕНЫХ задач за конкретный период":
 
 ```
-go run main.go --user=Почта_Пользователя --token=Токен --date_start=2022-10-01 --date_end=2022-10-31`
+go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --token="Token" --group="My Group" --date_start="2022-10-01" --"date_end=2022-10-31"`
 ```
+
+### 6. Запуск утилиты "Выгрузка отчета ОТКЛОНЕНЫХ задач за конкретный период":
+
+```
+go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --token="Token" --group="My Group" --date_start="2022-10-01" --"date_end=2022-10-31" --status="Denied"`
+```
+#### Заметка: Статусы которые были созданы в пространствах в jira

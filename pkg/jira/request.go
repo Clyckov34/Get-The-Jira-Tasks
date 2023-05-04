@@ -6,10 +6,10 @@ import (
 )
 
 //NewClient авторизация клиента к сервису jira
-func (m *Setting) NewClient() (*jira.Client, error){
+func NewClient(m *Setting) (*Response, error){
 	client, err := jira.NewClient(m.Auth.Client(), *m.Host)
 	if err != nil {
 		return nil, errors.New("ошибка: в подключении")
 	}
-	return client, nil
+	return &Response{Jira: client}, nil
 }

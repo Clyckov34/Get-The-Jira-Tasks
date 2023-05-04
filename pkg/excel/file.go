@@ -3,6 +3,7 @@ package excel
 import (
 	"errors"
 	"fmt"
+
 	"github.com/andygrunwald/go-jira"
 )
 
@@ -13,7 +14,7 @@ func (m *Options) ListAll() {
 	m.setTableTitle(nameSheet)
 	m.style(nameSheet)
 
-	for key, value := range *m.Issues {
+	for key, value := range m.Tasks {
 		m.setTableData(nameSheet, key, &value)
 	}
 
@@ -24,7 +25,7 @@ func (m *Options) ListAll() {
 func (m *Options) ListUser(userList *[]string) {
 	for _, user := range *userList {
 		data := make([]jira.Issue, 0)
-		for _, value := range *m.Issues {
+		for _, value := range m.Tasks {
 			if user == value.Fields.Assignee.DisplayName {
 				data = append(data, value)
 			} else {
@@ -43,10 +44,12 @@ func (m *Options) ListUser(userList *[]string) {
 }
 
 //Save сохранения файла
-func (m *Options) Save(startData, endData *string) error {
-	err := m.File.SaveAs(fmt.Sprintf("%v - %v.xlsx", *startData, *endData))
+func (m *Options) Save(startData, endData *string) (FileName, error) {
+	file := fmt.Sprintf("%v - %v.xlsx", *startData, *endData)
+
+	err := m.File.SaveAs(file)
 	if err != nil {
-		return errors.New("ошибка: сохранения файла")
+		return "", errors.New("ошибка: сохранения файла")
 	}
-	return nil
+	return FileName(file), nil
 }

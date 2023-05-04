@@ -1,4 +1,6 @@
-package app
+package jira
+
+import "github.com/andygrunwald/go-jira"
 
 //FlagParameters параметры флагов программы
 type FlagParameters struct {
@@ -9,4 +11,9 @@ type FlagParameters struct {
 	DateEnd   string
 	Group     string
 	Status    string
+}
+
+type Response struct {
+	Tasks []jira.Issue
+	Users []string
 }

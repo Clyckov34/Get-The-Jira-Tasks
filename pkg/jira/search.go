@@ -3,30 +3,30 @@ package jira
 import (
 	"errors"
 
-	jr "github.com/andygrunwald/go-jira"
+	"github.com/andygrunwald/go-jira"
 )
 
 // GetTask получить список задач
-func (m *Setting) GetTask(client *jr.Client) ([]jr.Issue, error) {
+func (m *Response) GetTask(jql string) ([]jira.Issue, error) {
 	var (
 		last   int
-		issues []jr.Issue
+		issues []jira.Issue
 	)
 
 	for {
-		opt := &jr.SearchOptions{
+		opt := &jira.SearchOptions{
 			MaxResults: 1000,
 			StartAt:    last,
 		}
 
-		chunk, resp, err := client.Issue.Search(*m.JQL, opt)
+		chunk, resp, err := m.Jira.Issue.Search(jql, opt)
 		if err != nil {
 			return nil, errors.New("ошибка: поиска")
 		}
 
 		total := resp.Total
 		if issues == nil {
-			issues = make([]jr.Issue, 0, total)
+			issues = make([]jira.Issue, 0, total)
 		}
 
 		issues = append(issues, chunk...)
@@ -39,10 +39,10 @@ func (m *Setting) GetTask(client *jr.Client) ([]jr.Issue, error) {
 }
 
 // GetGroupUser получить список сотрудников
-func (m *Setting) GetGroupUser(client *jr.Client, nameGroup *string) ([]string, error) {
+func (m *Response) GetGroupUser(nameGroup *string) ([]string, error) {
 	group := make([]string, 0)
 
-	list, _, err := client.Group.Get(*nameGroup)
+	list, _, err := m.Jira.Group.Get(*nameGroup)
 	if err != nil {
 		return nil, errors.New("ошибка: запрос в группу")
 	}

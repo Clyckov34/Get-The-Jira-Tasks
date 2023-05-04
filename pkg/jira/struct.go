@@ -1,9 +1,22 @@
 package jira
 
-import jr "github.com/andygrunwald/go-jira"
+import (
+	"github.com/andygrunwald/go-jira"
+)
+
+type JQL struct {
+	Status    string
+	DateStart string
+	DateEnd   string
+	Group     string
+}
 
 type Setting struct {
 	Host *string
-	Auth jr.BasicAuthTransport
-	JQL  *string
+	Auth jira.BasicAuthTransport
 }
+
+type Response struct {
+	Jira *jira.Client
+}
+
