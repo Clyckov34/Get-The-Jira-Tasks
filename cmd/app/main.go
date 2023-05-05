@@ -18,7 +18,7 @@ func init() {
 	flag.StringVar(&flagNew.DateStart, "date_start", date.Now(), "Начальная дата запроса. Формат: YYYY-MM-DD")
 	flag.StringVar(&flagNew.DateEnd, "date_end", date.Now(), "Конечная дата запроса. Формат: YYYY-MM-DD")
 	flag.StringVar(&flagNew.Group, "group", "", "Группа пользователей в Jira")
-	flag.StringVar(&flagNew.Status, "status", "Done", "Статус задач")
+	flag.StringVar(&flagNew.Status, "status", `"To Do", "In Progress", "Done", "Denied", "Pause"`, "Статус задач")
 }
 
 func main() {

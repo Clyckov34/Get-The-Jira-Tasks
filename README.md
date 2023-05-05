@@ -1,60 +1,86 @@
-# Report Jira Tasks
-Выгрузка отчета из группы пользователей Jira Cloud формате .xlsx
-***
-
-### Excel файл состоит из листов:
-- Выгрузка общего листа задач
-- Выгрузка задач отдельных пользователей (по листам) состоящих в группе jira
-
-### Excel файл состоит из таблицы c колонки:
-
-- `Ключ`
-- `№ задачи`
-- `URL задачи`
-- `Название задачи`
-- `Тип задачи`
-- `Статус задачи`
-- `Автор`
-- `Исполнитель`
-- `Задача Создана`
-- `Задача Закрыта`
-- `Задача Изменена`
-
-### 1. Создать группу
-Создать группу пользователей в jira по которым делать выгрузку задач:
-- Откройте панель администрации https://admin.atlassian.com/
-- Перейдите в раздел: **Groups** -> **Create group**
-- Укажите название группы например: "**My Group**"
-- Добавьте пользователей в группу.
-
-### 2. Сгенерировать Token
-- Чтобы создать свой токен https://id.atlassian.com/manage/api-tokens
-
-### 3. Описание флагов:
-
-- `--host` Хост Jira Cloud.
-- `--user` Логин пользователя
-- `--token` Токен
-- `--group` Название группы в Jira. Список пользователей.
-- `--date_start` Начальная дата запроса. Формат: YYYY-MM-DD `Default`: `Сегоднешний день 00:00`
-- `--date_end` Конечная дата запроса Формат: YYYY-MM-DD. `Default`: `Сегоднешний день 23:59`
-- `--status` Статус задачи. `Default`: `Done`
-
-### 4. Запуск утилиты "Выгрузка отчета ВЫПОЛНЕНЫХ задач за сегодня":
+<div>
+    <center>
+        <h1>Get The Jira Tasks</h1>
+        <p>Выгрузка задач по сотрудникам из системы Jira Cloud формате Excel.xlsx</p>
+    </center>
+</div>
+<div>
+    <h2>Excel файл</h2>
+    <p>Excel файл состоит:</p>
+    <ul>
+        <li>Общий лист задачами</li>
+        <li>Отдельные листы с задачами по каждому сотруднику</li>
+    </ul>
+    <p>Таблица состоит:</p>
+    <ul>
+        <li>Ключ</li>
+        <li>№ задачи</li>
+        <li>URL задачи</li>
+        <li>Название задачи</li>
+        <li>Тип задачи</li>
+        <li>Статус задачи</li>
+        <li>Автор</li>
+        <li>Исполнитель</li>
+        <li>Задача Создана</li>
+        <li>Задача Закрыта</li>
+        <li>Задача Изменена</li>
+    </ul>
+</div>
+<div>
+    <h2>Настройка Jira Cloud в личном кабинете</h2>
+    <ol>
+        <li>Создать группу сотрудников по которым делать выгрузку задач</li>
+        <ol>
+            <li>Откройте панель администрации <a href="https://admin.atlassian.com/">https://admin.atlassian.com/</a></li>
+            <li>Перейдите в раздел: <b>Groups</b> -> <b>Create group</b></li>
+            <li>Создать группу например: <b>My Group</b></li>
+            <li>Добавить сотрудников в группу</li>
+        </ol>
+        <li>Сгенерировать Token <a href="https://id.atlassian.com/manage/api-tokens">https://id.atlassian.com/manage/api-tokens</a></li>
+    </ol>
+</div>
+<div>
+<h2>Запуск утилиты с параметрами</h2>
+<p>Выгрузка задач за сегодня</p>
 
 ```
-go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --token="Token" --group="My Group"`
+go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --token="Token" --group="My Group"
 ```
-
-### 5. Запуск утилиты "Выгрузка отчета ВЫПОЛНЕНЫХ задач за конкретный период":
+<p>Выгрузка задач за конкретный период</p>
 
 ```
 go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --token="Token" --group="My Group" --date_start="2022-10-01" --"date_end=2022-10-31"`
 ```
-
-### 6. Запуск утилиты "Выгрузка отчета ОТКЛОНЕНЫХ задач за конкретный период":
+<p>Выгрузка задач со статусом "Done" за сегодня</p>
 
 ```
-go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --token="Token" --group="My Group" --date_start="2022-10-01" --"date_end=2022-10-31" --status="Denied"`
+go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --token="Token" --group="My Group" --date_start="2022-10-01" --"date_end=2022-10-31" --status="Done"
 ```
-#### Заметка: Статусы которые были созданы в пространствах в jira
+<p>Выгрузка задач с нескольками статусами: "Done" и "To Do" за сегодня:</p>
+
+```
+go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --token="Token" --group="My Group"` --status='"Done", "To Do"'
+```
+
+<p>Важный момент: По умолчанию задачи выгружаются со статусами: </p>
+<ul>
+    <li>To Do</li>
+    <li>In Progress</li>
+    <li>Done</li>
+    <li>Denied</li>
+    <li>Pause</li>
+<ul>
+</div>
+<div>
+    <h2>Описание параметров</h2>
+    <ul>
+        <li><code>--host</code> - Хост Jira Cloud <b>*</b></li>
+        <li><code>--user</code> - Логин пользователя <b>*</b></li>
+        <li><code>--token</code> - Токен пользователя <b>*</b></li>
+        <li><code>--group</code> - Название группы в Jira Cloud которую создавали. Список пользователей <b>*</b></li>
+        <li><code>--date_start</code> - Начальная дата запроса. Формат: YYYY-MM-DD <code>Default</code>: <code>Сегоднешний день 00:00</code></li>
+        <li><code>--date_end</code> - Конечная дата запроса Формат: YYYY-MM-DD. <code>Default</code>: <code>Сегоднешний день 23:59</code></li>
+        <li><code>--status</code> - Статус задачи. <code>Default</code>: <code>To Do, In Progress, Done, Denied, Pause</code></li>
+    </ul>
+    <p><b>*</b> - <i>Обязательные параметры при запуске скрипта</i></p>
+</div>
