@@ -14,7 +14,7 @@ import (
 func Run(fp *jira.FlagParameters) error {
 	timerStart := time.Now()
 
-	fmt.Println("Загрузка: 10%. Проверка параметров")
+	fmt.Println("Этап 1/4. Проверка параметров")
 
 	// Проверка параметров на кол-во
 	if err := check.Args(5); err != nil {
@@ -33,7 +33,7 @@ func Run(fp *jira.FlagParameters) error {
 		log.Fatalln(err)
 	}
 
-	fmt.Println("Загрузка: 50%. Запрос API " + fp.Host)
+	fmt.Println("Этап 2/4. Запрос API " + fp.Host)
 
 	//Запрос в API Jira Cloud
 	response, err := jira.Request(fp)
@@ -41,7 +41,7 @@ func Run(fp *jira.FlagParameters) error {
 		return err
 	}
 
-	fmt.Println("Загрузка: 90%. Выгрузка задач в Excel файл")
+	fmt.Println("Этап 3/4. Выгрузка задач в Excel файл")
 
 	//Создания Excel файла
 	fileName, err := excel.Write(response, fp)
@@ -49,6 +49,6 @@ func Run(fp *jira.FlagParameters) error {
 		return err
 	}
 
-	fmt.Printf("\nГотово\nКол-во задач: %d\nКол-во сотрудников: %d\nФайл: %v\nВремя выполнения скрипта %.2fs\n", len(response.Tasks), len(response.Users), fileName, time.Since(timerStart).Seconds())
+	fmt.Printf("Этап 4/4. Готово\n\nКол-во задач: %d\nКол-во сотрудников: %d\nФайл: %v\nВремя выполнения скрипта %.2fs\n", len(response.Tasks), len(response.Users), fileName, time.Since(timerStart).Seconds())
 	return nil
 }
