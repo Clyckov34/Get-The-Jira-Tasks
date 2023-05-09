@@ -78,8 +78,8 @@ go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --
         <li><code>--user</code> - Логин пользователя <b>*</b></li>
         <li><code>--token</code> - Токен пользователя <b>*</b></li>
         <li><code>--group</code> - Название группы в Jira Cloud которую создавали. Список пользователей <b>*</b></li>
-        <li><code>--date_start</code> - Начальная дата запроса. Формат: YYYY-MM-DD <code>Default</code>: <code>Сегоднешний день 00:00</code></li>
-        <li><code>--date_end</code> - Конечная дата запроса Формат: YYYY-MM-DD. <code>Default</code>: <code>Сегоднешний день 23:59</code></li>
+        <li><code>--date_start</code> - Начальная дата запроса. Формат: YYYY-MM-DD <code>Default</code>: <code>Сегоднешний день</code></li>
+        <li><code>--date_end</code> - Конечная дата запроса Формат: YYYY-MM-DD. <code>Default</code>: <code>Сегоднешний день</code></li>
         <li><code>--status</code> - Статус задачи. <code>Default</code>: <code>To Do, In Progress, Done, Denied, Pause</code></li>
     </ul>
     <p><b>*</b> - <i>Обязательные параметры при запуске скрипта</i></p>

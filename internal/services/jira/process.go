@@ -31,7 +31,7 @@ func Request(fp *FlagParameters) (*Response, error) {
 	}
 
 	//Поиск задач по фильту
-	tasks, err := client.GetTask(jira.Filter(filter))
+	tasks, err := client.GetTask(filter.Update())
 	if err != nil {
 		return nil, err
 	}
