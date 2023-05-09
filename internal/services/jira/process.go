@@ -31,7 +31,7 @@ func Request(fp *FlagParameters) (*Response, error) {
 	}
 
 	//Поиск задач по фильту
-	tasks, err := client.GetTask(filter.Update())
+	tasks, err := client.GetTask(filter.UpdateString())
 	if err != nil {
 		return nil, err
 	}
