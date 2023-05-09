@@ -29,8 +29,8 @@
 <div>
     <h2>Настройка Jira Cloud в личном кабинете</h2>
     <ol>
+        <li>Сгенерировать Token <a href="https://id.atlassian.com/manage/api-tokens">https://id.atlassian.com/manage/api-tokens</a></li>
         <li>Создать группу сотрудников по которым делать выгрузку задач</li>
-            <li>Сгенерировать Token <a href="https://id.atlassian.com/manage/api-tokens">https://id.atlassian.com/manage/api-tokens</a></li>
         <ul>
             <li>Откройте панель администрации <a href="https://admin.atlassian.com/">https://admin.atlassian.com/</a></li>
             <li>Перейдите в раздел: <b>Groups</b> -> <b>Create group</b></li>
