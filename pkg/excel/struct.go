@@ -10,5 +10,3 @@ type Options struct {
 	Tasks []jira.Issue
 	Host  string
 }
-
-type FileName string

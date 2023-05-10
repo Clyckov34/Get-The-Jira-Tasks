@@ -29,7 +29,7 @@
 <div>
     <h2>Настройка Jira Cloud в личном кабинете</h2>
     <ol>
-        <li>Сгенерировать Token <a href="https://id.atlassian.com/manage/api-tokens">https://id.atlassian.com/manage/api-tokens</a></li>
+        <li>С генерировать Token <a href="https://id.atlassian.com/manage/api-tokens">https://id.atlassian.com/manage/api-tokens</a></li>
         <li>Создать группу сотрудников по которым делать выгрузку задач</li>
         <ul>
             <li>Откройте панель администрации <a href="https://admin.atlassian.com/">https://admin.atlassian.com/</a></li>
@@ -57,7 +57,7 @@ go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --
 ```
 go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --token="Token" --group="My Group" --date_start="2022-10-01" --"date_end=2022-10-31" --status="Done"
 ```
-<p>Выгрузка задач с нескольками статусами: "Done" и "To Do" за сегодня:</p>
+<p>Выгрузка задач с несколькими статусами: "Done" и "To Do" за сегодня:</p>
 
 ```
 go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --token="Token" --group="My Group"` --status='"Done", "To Do"'

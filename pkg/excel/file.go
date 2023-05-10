@@ -2,7 +2,6 @@ package excel
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/andygrunwald/go-jira"
 )
@@ -44,12 +43,10 @@ func (m *Options) ListUser(userList *[]string) {
 }
 
 //Save сохранения файла
-func (m *Options) Save(startData, endData *string) (FileName, error) {
-	file := fmt.Sprintf("%v - %v.xlsx", *startData, *endData)
-
-	err := m.File.SaveAs(file)
+func (m *Options) Save(fileName string) error {
+	err := m.File.SaveAs(fileName)
 	if err != nil {
-		return "", errors.New("ошибка: сохранения файла")
+		return errors.New("ошибка: сохранения файла")
 	}
-	return FileName(file), nil
+	return nil
 }

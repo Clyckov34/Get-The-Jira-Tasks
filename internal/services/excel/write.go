@@ -1,6 +1,7 @@
 package excel
 
 import (
+	"fmt"
 	"rjt/internal/services/jira"
 	"rjt/pkg/excel"
 
@@ -8,7 +9,7 @@ import (
 )
 
 //Write создает файл excel
-func Write(rsp *jira.Response, fp *jira.FlagParameters) (excel.FileName, error) {
+func Write(rsp *jira.Response, fp *jira.FlagParameters) (string, error) {
 	var excelFile = &excel.Options{
 		File:  excelize.NewFile(),
 		Tasks: rsp.Tasks,
@@ -18,9 +19,10 @@ func Write(rsp *jira.Response, fp *jira.FlagParameters) (excel.FileName, error) 
 	excelFile.ListAll()            // Создания общего листа с задачами
 	excelFile.ListUser(&rsp.Users) // Создания листов по конкретным исполнителям
 
+	fileName := fmt.Sprintf("%s %s - %s.xlsx", fp.Group, fp.DateStart, fp.DateEnd)
+
 	// Создает файл excel
-	fileName, err := excelFile.Save(&fp.DateStart, &fp.DateEnd)
-	if err != nil {
+	if err := excelFile.Save(fileName); err != nil {
 		return "", err
 	}
 
