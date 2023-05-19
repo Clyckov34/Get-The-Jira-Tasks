@@ -2,7 +2,7 @@ package excel
 
 import (
 	"fmt"
-	"rjt/internal/services/jira"
+	"rjt/internal/jira"
 	"rjt/pkg/excel"
 
 	"github.com/xuri/excelize/v2"

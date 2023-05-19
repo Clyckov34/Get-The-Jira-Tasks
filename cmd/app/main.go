@@ -4,8 +4,8 @@ import (
 	"flag"
 	"log"
 	"rjt/internal/app"
-	"rjt/internal/services/date"
-	"rjt/internal/services/jira"
+	"rjt/internal/date"
+	"rjt/internal/jira"
 )
 
 var flagNew = &jira.FlagParameters{}

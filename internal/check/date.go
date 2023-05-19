@@ -2,7 +2,7 @@ package check
 
 import (
 	"errors"
-	dt "rjt/internal/services/date"
+	dt "rjt/internal/date"
 	"time"
 )
 

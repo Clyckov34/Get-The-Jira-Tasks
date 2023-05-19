@@ -3,10 +3,10 @@ package app
 import (
 	"fmt"
 	"log"
-	"rjt/internal/services/check"
-	"rjt/internal/services/excel"
-	"rjt/internal/services/info"
-	"rjt/internal/services/jira"
+	"rjt/internal/check"
+	"rjt/internal/excel"
+	"rjt/internal/info"
+	"rjt/internal/jira"
 	"time"
 )
 
