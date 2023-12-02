@@ -2,11 +2,12 @@ package excel
 
 import (
 	"errors"
+	jr "rjt/pkg/jira"
 
 	"github.com/andygrunwald/go-jira"
 )
 
-//ListAll запись общего списока задач
+// ListAll запись общего списока задач
 func (m *Options) ListAll() {
 	nameSheet := "Sheet1"
 
@@ -20,8 +21,14 @@ func (m *Options) ListAll() {
 	m.sheetRename(nameSheet, "Общий список задач")
 }
 
-//ListUser запись задач конкретных пользователей
+// ListUser запись задач конкретных пользователей
 func (m *Options) ListUser(userList *[]string) {
+	var key2 int
+
+	nameSheetRepair := "Repair"
+	m.File.NewSheet(nameSheetRepair)
+	m.style(nameSheetRepair)
+
 	for _, user := range *userList {
 		data := make([]jira.Issue, 0)
 		for _, value := range m.Tasks {
@@ -36,13 +43,26 @@ func (m *Options) ListUser(userList *[]string) {
 		m.setTableTitle(user)
 		m.style(user)
 
+		keyTask := make([]string, 0)
+		seen := map[string]bool{}
+
 		for key, value := range data {
 			m.setTableData(user, key, &value)
+
+			kt := jr.KeyTask(value.Key)
+			if !seen[kt] {
+				keyTask = append(keyTask, kt)
+			}
+			seen[kt] = true
 		}
+
+		key2++
+		m.setTableDataReport(nameSheetRepair, key2, user, keyTask)
+		keyTask = nil
 	}
 }
 
-//Save сохранения файла
+// Save сохранения файла
 func (m *Options) Save(fileName string) error {
 	err := m.File.SaveAs(fileName)
 	if err != nil {

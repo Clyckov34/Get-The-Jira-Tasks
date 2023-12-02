@@ -42,6 +42,31 @@ func (m *Options) setTableData(sheet string, key int, value *jira.Issue) {
 	_ = m.File.SetCellValue(sheet, fmt.Sprintf("K%d", key+2), parse(dateUpdateTask))
 }
 
+// setTableDataRepor запись данные в ячейки отчет
+func (m *Options) setTableDataReport(sheet string, key int, assignee string, value []string) {
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("A%d", key), assignee)
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("B%d", key), value)
+
+	var	pim, eci string
+
+	if len(value) == 0 {
+		pim = "-"
+	} else {
+		for _, v := range value {
+			if v == "BFBV2" || v == "SPR" {
+				eci = "ECI"
+			} else if v == "BIT" || v == "ETP" || v == "IP" || v == "PIM" {
+				pim = "PIM"
+			} else {
+				pim = "-"
+			}
+		}
+	}
+
+	res := pim + " " + eci
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("C%d", key), res)
+}
+
 // sheetRename переменовывает лист в таблице
 func (m *Options) sheetRename(oldName, newName string) {
 	m.File.SetSheetName(oldName, newName)
