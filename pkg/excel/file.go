@@ -29,6 +29,8 @@ func (m *Options) ListUser(userList *[]string) {
 	m.File.NewSheet(nameSheetRepair)
 	m.style(nameSheetRepair)
 
+	m.setTableTitleRepair(nameSheetRepair)
+
 	for _, user := range *userList {
 		data := make([]jira.Issue, 0)
 		for _, value := range m.Tasks {

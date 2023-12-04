@@ -23,6 +23,13 @@ func (m *Options) setTableTitle(nameSheet string) {
 	_ = m.File.SetCellValue(nameSheet, "K1", "Задача Изменена")
 }
 
+// setTableData загаловки столбцов
+func (m *Options) setTableTitleRepair(nameSheet string) {
+	_ = m.File.SetCellValue(nameSheet, "A1", "Сотрудники")
+	_ = m.File.SetCellValue(nameSheet, "B1", "Ключи задач")
+	_ = m.File.SetCellValue(nameSheet, "C1", "Продукт")
+}
+
 // setTableData запись данные в ячейки
 func (m *Options) setTableData(sheet string, key int, value *jira.Issue) {
 	dateCreateTask, _ := value.Fields.Created.MarshalJSON()
@@ -44,10 +51,10 @@ func (m *Options) setTableData(sheet string, key int, value *jira.Issue) {
 
 // setTableDataRepor запись данные в ячейки отчет
 func (m *Options) setTableDataReport(sheet string, key int, assignee string, value []string) {
-	_ = m.File.SetCellValue(sheet, fmt.Sprintf("A%d", key), assignee)
-	_ = m.File.SetCellValue(sheet, fmt.Sprintf("B%d", key), value)
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("A%d", key+1), assignee)
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("B%d", key+1), value)
 
-	var	pim, eci string
+	var pim, eci string
 
 	if len(value) == 0 {
 		pim = "-"
@@ -64,7 +71,7 @@ func (m *Options) setTableDataReport(sheet string, key int, assignee string, val
 	}
 
 	res := pim + " " + eci
-	_ = m.File.SetCellValue(sheet, fmt.Sprintf("C%d", key), res)
+	_ = m.File.SetCellValue(sheet, fmt.Sprintf("C%d", key+1), res)
 }
 
 // sheetRename переменовывает лист в таблице
