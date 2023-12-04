@@ -60,7 +60,7 @@ func (m *Options) setTableDataReport(sheet string, key int, assignee string, val
 		pim = "-"
 	} else {
 		for _, v := range value {
-			if v == "BFBV2" || v == "SPR" {
+			if v == "BFBV2" || v == "SPR" || v == "DATA" {
 				eci = "ECI"
 			} else if v == "BIT" || v == "ETP" || v == "IP" || v == "PIM" {
 				pim = "PIM"
