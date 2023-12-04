@@ -25,7 +25,7 @@ func (m *Options) ListAll() {
 func (m *Options) ListUser(userList *[]string) {
 	var key2 int
 
-	nameSheetRepair := "Repair"
+	nameSheetRepair := "Проекты разработчика"
 	m.File.NewSheet(nameSheetRepair)
 	m.style(nameSheetRepair)
 
