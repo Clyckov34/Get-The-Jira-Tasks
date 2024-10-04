@@ -52,7 +52,7 @@ go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --
 ```
 go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --token="Token" --group="My Group" --date_start="2022-10-01" --"date_end=2022-10-31"`
 ```
-<p>Выгрузка задач со статусом "Done" за сегодня</p>
+<p>Выгрузка задач со статусом "Done" за конкретный период</p>
 
 ```
 go run cmd/app/main.go --host="https://myServer.atlassian.net" --user="Login" --token="Token" --group="My Group" --date_start="2022-10-01" --"date_end=2022-10-31" --status="Done"
